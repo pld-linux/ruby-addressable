@@ -6,8 +6,8 @@
 Summary:	Improved URI/URL Implementation
 Name:		ruby-%{pkgname}
 Version:	2.3.4
-Release:	1
-License:	Apache License 2.0
+Release:	2
+License:	Apache v2.0
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	8f65a872503163a710f69b0fa2e9c4e3
@@ -23,22 +23,25 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Addressable is a replacement for the URI implementation that is part of
-Ruby's standard library. It more closely conforms to the relevant RFCs and
-adds support for IRIs and URI templates.
+Addressable is a replacement for the URI implementation that is part
+of Ruby's standard library. It more closely conforms to the relevant
+RFCs and adds support for IRIs and URI templates.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
 
 %build
+%__gem_helper spec
+
 %if %{with tests}
 rspec spec/
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{ruby_vendorlibdir}
+install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_specdir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
+cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -47,3 +50,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.md CHANGELOG.md LICENSE.txt
 %{ruby_vendorlibdir}/%{pkgname}
+%{ruby_specdir}/%{pkgname}-%{version}.gemspec
