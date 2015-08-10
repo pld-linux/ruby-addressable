@@ -6,11 +6,12 @@
 Summary:	Improved URI/URL Implementation
 Name:		ruby-%{pkgname}
 Version:	2.3.5
-Release:	2
+Release:	3
 License:	Apache v2.0
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	6b9a61885c3c95f912eec560f8f2e3eb
+Patch0:		data-location.patch
 URL:		http://addressable.rubyforge.org/
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
@@ -29,6 +30,7 @@ RFCs and adds support for IRIs and URI templates.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
+%patch0 -p1
 
 %build
 %__gem_helper spec
@@ -39,10 +41,10 @@ rspec spec/
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_specdir},%{ruby_vendordir}/data}
+install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_specdir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
 cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
-cp -a data/* $RPM_BUILD_ROOT%{ruby_vendordir}/data
+cp -a data/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}/%{pkgname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -52,7 +54,3 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.md CHANGELOG.md LICENSE.txt
 %{ruby_vendorlibdir}/%{pkgname}
 %{ruby_specdir}/%{pkgname}-%{version}.gemspec
-
-# XXX move %{ruby_vendordir}/data to ruby.spec
-%dir %{ruby_vendordir}/data
-%{ruby_vendordir}/data/unicode.data

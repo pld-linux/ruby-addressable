@@ -1,0 +1,11 @@
+--- ./lib/addressable/idna/pure.rb~	2014-07-22 05:31:24.000000000 +0300
++++ ./lib/addressable/idna/pure.rb	2015-08-10 16:46:57.117580861 +0300
+@@ -33,7 +33,7 @@
+ 
+ 
+     UNICODE_TABLE = File.expand_path(
+-      File.join(File.dirname(__FILE__), '../../..', 'data/unicode.data')
++      File.join(File.dirname(__FILE__), '..', 'data/unicode.data')
+     )
+ 
+     ACE_PREFIX = "xn--"
