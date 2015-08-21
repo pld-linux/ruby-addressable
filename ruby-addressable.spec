@@ -6,7 +6,7 @@
 Summary:	Improved URI/URL Implementation
 Name:		ruby-%{pkgname}
 Version:	2.3.5
-Release:	3
+Release:	4
 License:	Apache v2.0
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
@@ -44,7 +44,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_specdir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
 cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
-cp -a data/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}/%{pkgname}
+cp -a data $RPM_BUILD_ROOT%{ruby_vendorlibdir}/%{pkgname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
