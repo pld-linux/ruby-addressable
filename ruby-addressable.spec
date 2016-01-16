@@ -6,7 +6,7 @@
 Summary:	Improved URI/URL Implementation
 Name:		ruby-%{pkgname}
 Version:	2.3.5
-Release:	5
+Release:	6
 License:	Apache v2.0
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
