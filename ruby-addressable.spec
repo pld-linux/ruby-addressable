@@ -30,7 +30,7 @@ RFCs and adds support for IRIs and URI templates.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %__gem_helper spec
