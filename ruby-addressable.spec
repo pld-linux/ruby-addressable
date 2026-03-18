@@ -5,14 +5,13 @@
 %define	pkgname	addressable
 Summary:	Improved URI/URL Implementation
 Name:		ruby-%{pkgname}
-Version:	2.3.5
-Release:	6
+Version:	2.8.8
+Release:	1
 License:	Apache v2.0
 Group:		Development/Languages
-Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
-# Source0-md5:	6b9a61885c3c95f912eec560f8f2e3eb
-Patch0:		data-location.patch
-URL:		http://addressable.rubyforge.org/
+Source0:	https://rubygems.org/downloads/%{pkgname}-%{version}.gem
+# Source0-md5:	51d1a2204c947a6577fb9c0c7a708036
+URL:		https://github.com/sporkmonger/addressable
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
 %if %{with tests}
@@ -30,8 +29,6 @@ RFCs and adds support for IRIs and URI templates.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
-%patch -P0 -p1
-
 %build
 %__gem_helper spec
 
@@ -44,7 +41,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_specdir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
 cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
-cp -a data $RPM_BUILD_ROOT%{ruby_vendorlibdir}/%{pkgname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -53,4 +49,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.md CHANGELOG.md LICENSE.txt
 %{ruby_vendorlibdir}/%{pkgname}
+%{ruby_vendorlibdir}/%{pkgname}.rb
 %{ruby_specdir}/%{pkgname}-%{version}.gemspec
